@@ -1,10 +1,13 @@
 import './App.css';
 import { bubbleSort } from './algorithms/bubbleSort';
 import { heapSort } from './algorithms/heapSort';
-import { insertionSort } from './algorithms/insertionSort'; // Add this import
+import { insertionSort } from './algorithms/insertionSort';  
+import { mergeSort } from './algorithms/mergeSort';
+import { quickSort } from './algorithms/quickSort';
+import { selectionSort } from './algorithms/selectionSort';
+
 import { useState, useEffect, useCallback, useRef } from 'react';
 import Bar from './components/Bar';
-import { mergeSort } from './algorithms/mergeSort';
 
 function App() {
   const [selectedAlgorithm, setSelectedAlgorithm] = useState('');
@@ -109,6 +112,24 @@ function App() {
             () => isResetRef.current
           );
           break;
+        case 'quick':
+          await quickSort(
+            array,
+            onCompare,
+            delayMs,
+            () => isPausedRef.current,
+            () => isResetRef.current
+          );
+          break;
+        case 'selection':
+          await selectionSort(
+            array,
+            onCompare,
+            delayMs,
+            () => isPausedRef.current,
+            () => isResetRef.current
+          );
+          break;
         default:
           break;
       }
@@ -121,7 +142,7 @@ function App() {
       setIsPaused(false);
       isPausedRef.current = false;
     }
-}, [selectedAlgorithm, array, speed]);
+}, [selectedAlgorithm, array, speed, isSorting]);
 
   return (
     <div className="App">
