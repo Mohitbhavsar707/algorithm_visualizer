@@ -4,6 +4,7 @@ import { heapSort } from './algorithms/heapSort';
 import { insertionSort } from './algorithms/insertionSort'; // Add this import
 import { useState, useEffect, useCallback, useRef } from 'react';
 import Bar from './components/Bar';
+import { mergeSort } from './algorithms/mergeSort';
 
 function App() {
   const [selectedAlgorithm, setSelectedAlgorithm] = useState('');
@@ -92,6 +93,15 @@ function App() {
           break;
         case 'insertion':
           await insertionSort(
+            array,
+            onCompare,
+            delayMs,
+            () => isPausedRef.current,
+            () => isResetRef.current
+          );
+          break;
+        case 'merge':
+          await mergeSort(
             array,
             onCompare,
             delayMs,
